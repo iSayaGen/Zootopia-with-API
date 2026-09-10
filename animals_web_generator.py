@@ -1,21 +1,14 @@
-import json
+import data_fetcher
 
 
 # Program flow:
-# load_data()         → JSON → Python data
-# get_animal_info()   → extract relevant animal data
-# display_animal()    → Python data → terminal (optional)
-# serialize_animal()  → Python data → HTML string
-# load_template()     → HTML file → string
-# save_html()         → string → HTML file
-# main()              → coordinates HTML generation
-
-
-def load_data(file_path):
-  """Load and return animal data from a JSON file"""
-
-  with open(file_path, "r", encoding="utf-8") as handle:
-    return json.load(handle)
+# data_fetcher.fetch_data()     → API → Python data
+# get_animal_info()             → extract relevant animal data
+# display_animal()              → Python data → terminal (optional)
+# serialize_animal()            → Python data → HTML string
+# load_template()               → HTML file → string
+# save_html()                   → string → HTML file
+# main()                        → coordinates data fetching and HTML generation
 
 
 
@@ -110,7 +103,9 @@ def save_html(file_path, html_content):
 def main():
     """Load animal data and generate the HTML page."""
 
-    animals_data = load_data('animals_data.json')
+    animal_name = input("Enter an animal name: ")
+
+    animals_data = data_fetcher.fetch_data(animal_name)
 
     all_animals_html = ""
 
