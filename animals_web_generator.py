@@ -1,6 +1,5 @@
 import data_fetcher
 
-
 # Program flow:
 # data_fetcher.fetch_data()     → API → Python data
 # get_animal_info()             → extract relevant animal data
@@ -9,7 +8,6 @@ import data_fetcher
 # load_template()               → HTML file → string
 # save_html()                   → string → HTML file
 # main()                        → coordinates data fetching and HTML generation
-
 
 
 def get_animal_info(animal):
@@ -50,39 +48,38 @@ def serialize_animal(animal):
 
     animal_info = get_animal_info(animal)
 
-    animal_html = '            <li class="cards__item">\n'
+    animal_html = '<li class="cards__item">\n'
 
     if animal_info["name"]:
         animal_html += (
-            f'                <div class="card__title">'
-            f'{animal_info["name"]}</div>\n'
+            f'<div class="card__title">{animal_info["name"]}</div>\n'
         )
 
-    animal_html += '                <div class="card__text">\n'
-    animal_html += '                    <ul class="card__details">\n'
+    animal_html += '<div class="card__text">\n'
+    animal_html += '<ul class="card__details">\n'
 
     if animal_info["diet"]:
         animal_html += (
-            f'                        <li class="card__detail">'
+            f'<li class="card__detail">'
             f'<strong>Diet:</strong> {animal_info["diet"]}</li>\n'
         )
 
     if animal_info["locations"]:
         animal_html += (
-            f'                        <li class="card__detail">'
+            f'<li class="card__detail">'
             f'<strong>Location:</strong> '
             f'{", ".join(animal_info["locations"])}</li>\n'
         )
 
     if animal_info["type"]:
         animal_html += (
-            f'                        <li class="card__detail">'
+            f'<li class="card__detail">'
             f'<strong>Type:</strong> {animal_info["type"]}</li>\n'
         )
 
-    animal_html += '                    </ul>\n'
-    animal_html += '                </div>\n'
-    animal_html += '            </li>\n'
+    animal_html += '</ul>\n'
+    animal_html += '</div>\n'
+    animal_html += '</li>\n'
 
     return animal_html
 
@@ -113,13 +110,12 @@ def main():
     if animals_data:
         for animal in animals_data:
             all_animals_html += serialize_animal(animal)
-
     else:
         all_animals_html = (
             f'<h2>The animal "{animal_name}" is not in the database.</h2>'
         )
 
-    animals_template = load_template('animals_template.html')
+    animals_template = load_template("animals_template.html")
 
     # Replace the placeholder and its existing indentation
     # with generated animal cards.
@@ -128,7 +124,7 @@ def main():
         all_animals_html
     )
 
-    save_html('animals.html', animals_html)
+    save_html("animals.html", animals_html)
 
     print("Website was successfully generated to the file animals.html.")
 
