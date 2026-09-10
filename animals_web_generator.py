@@ -24,6 +24,7 @@ def get_animal_info(animal):
         "type": characteristics.get("type"),
     }
 
+
 def display_animal(animal):
     """Display selected information for one animal."""
 
@@ -109,8 +110,14 @@ def main():
 
     all_animals_html = ""
 
-    for animal in animals_data:
-        all_animals_html += serialize_animal(animal)
+    if animals_data:
+        for animal in animals_data:
+            all_animals_html += serialize_animal(animal)
+
+    else:
+        all_animals_html = (
+            f'<h2>The animal "{animal_name}" is not in the database.</h2>'
+        )
 
     animals_template = load_template('animals_template.html')
 
@@ -122,6 +129,8 @@ def main():
     )
 
     save_html('animals.html', animals_html)
+
+    print("Website was successfully generated to the file animals.html.")
 
 
 if __name__ == "__main__":
